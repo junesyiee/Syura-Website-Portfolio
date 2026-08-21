@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siti Nurasyura | Portfolio</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #38bdf8;
+            --header-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #1e293b;
+        }
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 1.2rem; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Layout */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5rem 0; }
+        h2 { font-family: sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--accent); }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 6rem 0 4rem 0; }
+        .profile-img { 
+            width: 200px; height: 200px; border-radius: 50%; 
+            object-fit: cover; border: 4px solid var(--accent); 
+            margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+        h1 { font-family: sans-serif; font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .accent-text { color: var(--accent); }
+        .hero p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2rem; }
+
+        /* Buttons */
+        .btn { 
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 0.8rem 1.8rem; background: var(--accent); color: var(--bg); 
+            text-decoration: none; border-radius: 8px; font-weight: bold; 
+            transition: all 0.3s ease; 
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4); }
+
+        /* About & Education Layout */
+        .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; }
+        .about-text { font-size: 1.05rem; color: var(--text-dim); }
+        .edu-card { 
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            padding: 1.5rem; border-radius: 12px; border: 1px solid #334155;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .edu-card h4 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .edu-card p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        /* Experience Timeline */
+        .timeline { position: relative; margin: 2rem 0; }
+        .timeline::before { 
+            content: ''; position: absolute; left: 0; top: 0; width: 2px; 
+            height: 100%; background: var(--card-bg); 
+        }
+        .timeline-item { position: relative; padding-left: 3rem; margin-bottom: 3rem; }
+        .timeline-item::before { 
+            content: ''; position: absolute; left: -5px; top: 5px; 
+            width: 12px; height: 12px; border-radius: 50%; 
+            background: var(--accent); box-shadow: 0 0 10px var(--accent);
+        }
+        .time-date { font-size: 0.9rem; color: var(--accent); font-weight: bold; }
+        .time-content h3 { font-size: 1.3rem; margin: 0.3rem 0; }
+        .time-content p { color: var(--text-dim); }
+
+        /* Project Cards Styling */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        .card { 
+            background: var(--card-bg); 
+            border-radius: 12px; 
+            transition: all 0.3s ease; 
+            border: 1px solid transparent; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; /* Important for the image corners */
+        }
+        .card:hover { transform: translateY(-10px); border: 1px solid var(--accent); }
+        
+        /* Project Image Styles */
+        .project-img-container {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers area without stretching */
+            transition: transform 0.5s ease;
+        }
+        .card:hover .project-img-container img {
+            transform: scale(1.1);
+        }
+
+        .project-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-info h3 { margin-bottom: 0.8rem; }
+        .project-info p { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+        
+        /* Tag Fixes */
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+        .tag { 
+            font-size: 0.75rem; background: #334155; padding: 0.4rem 0.8rem; 
+            border-radius: 4px; color: var(--accent); font-weight: 600;
+        }
+
+        /* Skills specific card height fix */
+        .skills-grid .card { padding: 1.5rem; }
+
+        /* Contact Section */
+        .contact-flex { display: flex; gap: 2rem; margin-top: 1rem; }
+        .contact-link { color: var(--text-main); text-decoration: none; font-size: 1.5rem; transition: 0.3s; }
+        .contact-link:hover { color: var(--accent); transform: scale(1.2); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#" class="logo">Syura's Portfolio</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="syura.jpeg" alt="Siti Nurasyura" class="profile-img">
+        <h1>Hello, I'm <span class="accent-text">Siti Nurasyura</span>.</h1>
+        <h3>A Multimedia Computing Graduate</h3>
+        <p>Web/Software Development | UI/UX Design | Digital Solutions</p>
+        <a href="resume.pdf" class="btn" download>
+            <i class="fas fa-download"></i> Download CV
+        </a>
+    </section>
+
+    <!-- About Me -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-grid">
+        <div class="about-text">
+            <p>I am a Bachelor's Degree in Computer Science (Hons.) Multimedia Computing graduate from UiTM. I have strong passion in software development, UI/UX design, and digital solutions.</p><br>
+            <p>During my journey as a university student, I experienced in developing a variety of websites, applications, and softwares along with coordinating databases, designing UI/UX and analyzing data. Other than that, I also familiarize with artificial intelligence concepts and virtual reality during my studies.</p><br>
+            <p>I am currently looking for opportunities to apply my technical knowledge and skills, along with continuing to improve and learn professionally in this field.</p>
+        </div>
+        <div class="edu-card">
+                <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+                <p><strong>Bachelor of Computer Science (Hons) Multimedia Computing</strong></p>
+                <p style="color: var(--text-dim);">UiTM Shah Alam</p>
+                <hr style="border: 0; border-top: 1px solid #334155; margin: 10px 0;">
+                <p><strong>Diploma in Computer Science</strong></p>
+                <p style="color: var(--text-dim);">UiTM Kampus Samarahan 2, Sarawak</p>
+                <hr style="border: 0; border-top: 1px solid #334155; margin: 10px 0;">
+                <p><strong>Secondary School (SPM)</strong></p>
+                <p style="color: var(--text-dim);">MRSM Tun Mohammad Fuad Stephens, Sandakan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-date">MARCH - JULY 2026</div>
+                <div class="time-content">
+                    <h3>ICT Assistant (Internship)</h3>
+                    <p>Sandakan, Sabah</p>
+                    <p>Assisted with ICT-related technical support, troubleshooting, and equipment setup for staff 
+and unit activities.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-date">SEPTEMBER 2023 - MARCH 2024</div>
+                <div class="time-content">
+                    <h3>Diploma Internship Trainee</h3>
+                    <p>Sandakan, Sabah</p>
+                    <p>Assisted in maintaining computer labs, troubleshooting hardware/software issues, and 
+supporting staff and students with necessities related to ICT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Projects -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="grid">
+            <!-- Project 1 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="cyclecare.jpg" alt="CycleCare">
+                </div>
+                <div class="project-info">
+                    <h3>CycleCare: Smart Health Assistant for Menstrual Irregularities Based on AI</h3>
+                    <p>A mobile application that recommends activities to help women with irregular cycles achieve a normal cycle.</p>
+                    <div class="tag-container">
+                        <span class="tag">Android Studio</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">xml</span>
+                        <span class="tag">Mobile Development</span>
+                        <span class="tag">Artificial Intelligence</span>
+                        <span class="tag">User-centric design</span>
+                    </div>
+                    <a href="cyclecare.html" style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="abm.png" alt="Asset Application Website Prototype">
+                </div>
+                <div class="project-info">
+                    <h3>(Ongoing) Asset Application Website Prototype</h3>
+                    <p>An internship project which is a web-based platform to centralize departmental asset applications and automate data collection, reducing reliance on manual Excel spreadsheet submissions.</p>
+                    <div class="tag-container">
+                        <span class="tag">Google Sites</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Google Apps Script</span>
+                        <span class="tag">Digital Solutions</span>
+                        <span class="tag">Web Development</span>
+                    </div>
+                    <a href="asset.html" style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="video.jpg" alt="eDOLA 2026 EduVision Video">
+                </div>
+                <div class="project-info">
+                    <h3>eDOLA 2026 Educational Video Production for EduVision Category</h3>
+                    <p>Collaborated in the production and editing of an educational video titled “Bahaya, Hazard & Risiko” for eDOLA 2026 as a co-editor.</p>
+                    <div class="tag-container">
+                        <span class="tag">Video Editing</span>
+                        <span class="tag">Capcut</span>
+                        <span class="tag">Youtube</span>
+                    </div>
+                    <a href="https://youtu.be/1X8ulC6TxQk?si=KZoOqO5DLYH9-1Bm" style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="nutri.jpg" alt="NutriLearn">
+                </div>
+                <div class="project-info">
+                    <h3>NutriLearn: Interactive Nutrition Education for Children</h3>
+                    <p>An application-based educational platform for learning about nutrition from a food pyramid.</p>
+                    <div class="tag-container">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Mobile Development</span>
+                        <span class="tag">Team Project</span>
+                    </div>
+                    <a href=https://youtu.be/t5z-FZwbdsU style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="game.png" alt="Coin Collector">
+                </div>
+                <div class="project-info">
+                    <h3>Coin Collector: A Mini Game Project</h3>
+                    <p>Simple mini game where a player collect coins to win while avoiding obstacles.</p>
+                    <div class="tag-container">
+                        <span class="tag">Construct 2</span>
+                        <span class="tag">Game Design</span>
+                    </div>
+                    <a href=https://youtu.be/sP8HklqJmUM style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="card">
+                <div class="project-img-container">
+                    <img src="problem.jpg" alt="Readers-Writers Problem">
+                </div>
+                <div class="project-info">
+                    <h3>Video Creation: Readers-Writers Problem in Synchronization</h3>
+                    <p>An independent video production to educate computer science students in a fun and creative way.</p>
+                    <div class="tag-container">
+                        <span class="tag">Video Editing</span>
+                        <span class="tag">Capcut</span>
+                        <span class="tag">Canva</span>
+                    </div>
+                    <a href=https://youtu.be/Hu2cW8O9hxw style="color: var(--accent); text-decoration: none; font-weight: 600; margin-top: auto;">View Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="grid skills-grid">
+            <div class="card">
+                <h3>Programming</h3>
+                <div class="tag-container" style="margin-top: 1rem;">
+                    <span class="tag">Java</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">C++</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Tools & Platforms</h3>
+                <div class="tag-container" style="margin-top: 1rem;">
+                    <span class="tag">Android Studio</span>
+                    <span class="tag">VS Code</span>
+                    <span class="tag">Flutter</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">Blender</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Capcut</span>
+                    <span class="tag">Canva</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="text-align: center;">
+        <h2>Get In Touch</h2>
+        <p style="color: var(--text-dim); margin-bottom: 2rem;">I'm currently looking for new opportunities. Feel free to reach out!</p>
+        <div class="contact-flex">
+            <a href="mailto:sitinurasyura@email.com" class="contact-link"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/siti-nurasyura-hasnan-074090274/" class="contact-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/junesyiee" class="contact-link" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem 0; text-align: center; color: #475569; font-size: 0.9rem; border-top: 1px solid var(--card-bg);">
+        <p>&copy; 2026 Siti Nurasyura Binti Hasnan. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
